@@ -1,6 +1,7 @@
-import Head from 'next/head'
+import Head from 'next/head';
+import { ReactElement } from 'react';
 
-export default function Home() {
+export default function Home(): ReactElement {
   return (
     <>
       <Head>
@@ -12,5 +13,5 @@ export default function Home() {
         <h1>Next JS Blog</h1>
       </div>
     </>
-  )
+  );
 }
