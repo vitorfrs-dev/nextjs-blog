@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
-import { AppProps } from 'next/dist/next-server/lib/router/router';
-import '../styles/globals.css';
+import { AppProps } from 'next/app';
+import '../styles/globals.scss';
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return <Component {...pageProps} />;
