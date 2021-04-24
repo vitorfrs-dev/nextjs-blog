@@ -1,0 +1,55 @@
+.previewHeader {
+  display: block;
+
+  img {
+    width: 100%;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgb(0 0 0 / 12%);
+    transition: box-shadow 0.2s;
+    margin-bottom: 1rem;
+    &:hover {
+      box-shadow: 0 5px 30px rgb(0 0 0 / 12%);
+    }
+  }
+
+  @media (max-width: 650px) {
+    a,
+    time {
+      padding: 0 1.25rem;
+    }
+  }
+
+  a {
+    display: block;
+    font-size: 2rem;
+    text-decoration: none;
+    color: var(--black);
+    margin-bottom: 1rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  time {
+    font-size: 1.125rem;
+  }
+}
+
+.previewContent {
+  margin-top: 1rem;
+  @media (max-width: 650px) {
+    padding: 0 1.25rem;
+  }
+
+  p {
+    font-size: 1.125rem;
+    line-height: 1.625;
+    margin-bottom: 1rem;
+  }
+
+  span {
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+}
