@@ -63,7 +63,7 @@ export default function Home({ postsPreview }: HomeProps): JSX.Element {
       </div>
 
       <footer className={styles.homeFooter}>
-        <div className={styles.homeFooterContent}>
+        <div>
           <h1>Statically Generated with Next.js.</h1>
         </div>
       </footer>

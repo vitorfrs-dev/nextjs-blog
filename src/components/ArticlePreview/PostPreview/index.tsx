@@ -15,7 +15,7 @@ interface PostPreviewProps {
 
 export function PostPreview({ previewData }: PostPreviewProps): ReactElement {
   return (
-    <div>
+    <div className={styles.previewContainer}>
       <header className={styles.previewHeader}>
         <Link href={`/post/${previewData.uid}`}>
           <img src={previewData.banner} alt="banner" />
