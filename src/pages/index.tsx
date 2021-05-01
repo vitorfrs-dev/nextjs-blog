@@ -7,7 +7,7 @@ import { NewPostPreview } from '../components/ArticlePreview/NewPostPreview';
 import { getPrismicClient } from '../services/prismic';
 import { getFormattedDate } from '../utils/getFormattedDate';
 
-import styles from '../styles/home.module.scss';
+import styles from '../styles/Home.module.scss';
 import { PostPreview } from '../components/ArticlePreview/PostPreview';
 
 interface PostPreview {
