@@ -3,6 +3,14 @@
   max-width: 1230px;
   margin: 0 auto;
 
+  > p {
+    font-size: 1.25rem;
+
+    @media (max-width: 1300px) {
+      text-align: center;
+    }
+  }
+
   @media (min-width: 650px) and (max-width: 1300px) {
     padding: 0 3.125rem 0;
   }
@@ -44,8 +52,16 @@
 .homeContentGrid {
   margin-top: 10rem;
 
+  > p {
+    font-size: 1.25rem;
+  }
+
   @media (max-width: 650px) {
     margin-top: 6rem;
+
+    > p {
+      padding: 0 1.25rem;
+    }
   }
 
   h1 {

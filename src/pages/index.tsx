@@ -3,12 +3,12 @@ import Head from 'next/head';
 import Prismic from '@prismicio/client';
 
 import { NewPostPreview } from '../components/ArticlePreview/NewPostPreview';
+import { PostPreview } from '../components/ArticlePreview/PostPreview';
 
 import { getPrismicClient } from '../services/prismic';
 import { getFormattedDate } from '../utils/getFormattedDate';
 
-import styles from '../styles/home.module.scss';
-import { PostPreview } from '../components/ArticlePreview/PostPreview';
+import styles from '../styles/Home.module.scss';
 
 interface PostPreview {
   uid: string;
@@ -16,7 +16,7 @@ interface PostPreview {
   publication_date: string;
   description: string;
   author: string;
-  banner: string | null;
+  banner: string;
 }
 
 interface HomeProps {
@@ -49,17 +49,30 @@ export default function Home({ postsPreview }: HomeProps): JSX.Element {
           </p>
         </header>
 
-        <NewPostPreview previewData={postsPreview.newPostPreview} />
+        {postsPreview.newPostPreview ? (
+          <>
+            <NewPostPreview previewData={postsPreview.newPostPreview} />
 
-        <main className={styles.homeContentGrid}>
-          <h1>More Stories</h1>
+            <main className={styles.homeContentGrid}>
+              <h1>More Stories</h1>
 
-          <div>
-            {postsPreview.oldPostsPreview.map((previewData) => (
-              <PostPreview key={previewData.uid} previewData={previewData} />
-            ))}
-          </div>
-        </main>
+              {postsPreview.oldPostsPreview.length === 0 ? (
+                <p>more posts coming soon! 👨🏻‍💻😁</p>
+              ) : (
+                <div>
+                  {postsPreview.oldPostsPreview.map((previewData) => (
+                    <PostPreview
+                      key={previewData.uid}
+                      previewData={previewData}
+                    />
+                  ))}
+                </div>
+              )}
+            </main>
+          </>
+        ) : (
+          <p>nothing here 🤦🏻‍♂️, come back later, soon we will have news!👨🏻‍💻</p>
+        )}
       </div>
 
       <footer className={styles.homeFooter}>
@@ -97,8 +110,8 @@ export const getStaticProps: GetStaticProps = async () => {
   const [newPostPreview, ...oldPostsPreview] = previews;
 
   const postsPreview = {
-    newPostPreview,
-    oldPostsPreview,
+    newPostPreview: newPostPreview || null,
+    oldPostsPreview: oldPostsPreview || null,
   };
 
   return {
