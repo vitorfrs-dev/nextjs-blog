@@ -5,24 +5,15 @@ import Prismic from '@prismicio/client';
 import { NewPostPreview } from '../components/ArticlePreview/NewPostPreview';
 
 import { getPrismicClient } from '../services/prismic';
-import { getFormattedDate } from '../utils/getFormattedDate';
-
 import styles from '../styles/Home.module.scss';
 import { PostPreview } from '../components/ArticlePreview/PostPreview';
-
-interface PostPreview {
-  uid: string;
-  title: string;
-  publication_date: string;
-  description: string;
-  author: string;
-  banner: string | null;
-}
+import parsePreviewData from '../utils/parsePreviewData';
+import { PostPreviewData } from '../types/Post';
 
 interface HomeProps {
   postsPreview: {
-    newPostPreview: PostPreview;
-    oldPostsPreview: PostPreview[];
+    newPostPreview: PostPreviewData;
+    oldPostsPreview: PostPreviewData[];
   };
 }
 
@@ -83,16 +74,7 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   );
 
-  const previews = response.results.map((post) => {
-    return {
-      uid: post.uid,
-      publication_date: getFormattedDate(post.first_publication_date),
-      title: post.data.title,
-      description: post.data.description,
-      author: post.data.author,
-      banner: post.data.banner.url,
-    };
-  });
+  const previews = response.results.map(parsePreviewData);
 
   const [newPostPreview, ...oldPostsPreview] = previews;
 

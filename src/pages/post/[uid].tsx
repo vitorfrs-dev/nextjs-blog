@@ -7,14 +7,14 @@ import Prismic from '@prismicio/client';
 import { RichText } from 'prismic-reactjs';
 import styles from '../../styles/Posts.module.scss';
 import { getPrismicClient } from '../../services/prismic';
-import { Post as PostType } from '../../types/Post';
+import { Post as PostType, PostPreviewData } from '../../types/Post';
 
-import { getFormattedDate } from '../../utils/getFormattedDate';
 import { PostPreview } from '../../components/ArticlePreview/PostPreview';
+import parsePreviewdata from '../../utils/parsePreviewData';
 
 interface PostProps {
   post: PostType;
-  otherPosts: PostType[];
+  otherPosts: PostPreviewData[];
 }
 
 export default function Post({ post, otherPosts }: PostProps): ReactElement {
@@ -41,7 +41,7 @@ export default function Post({ post, otherPosts }: PostProps): ReactElement {
           <h1>More Stories</h1>
           <div>
             {otherPosts.map((p) => (
-              <PostPreview key={p.slug} previewData={p} />
+              <PostPreview key={p.uid} previewData={p} />
             ))}
           </div>
         </div>
@@ -68,16 +68,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
   );
 
-  const previews = response.results.map((post) => {
-    return {
-      uid: post.uid,
-      publication_date: getFormattedDate(post.first_publication_date),
-      title: post.data.title,
-      description: post.data.description,
-      author: post.data.author,
-      banner: post.data.banner.url,
-    };
-  });
+  const previews = response.results.map(parsePreviewdata);
 
   return {
     props: {
