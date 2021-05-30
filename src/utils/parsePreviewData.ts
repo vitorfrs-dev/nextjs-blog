@@ -9,5 +9,6 @@ export default function parsePreviewData(post: RawPost): PostPreviewData {
     description: post.data.description,
     author: post.data.author,
     banner: post.data.banner,
+    avatar: post.data.avatar,
   };
 }

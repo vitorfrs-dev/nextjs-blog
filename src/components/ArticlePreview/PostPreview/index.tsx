@@ -2,6 +2,7 @@ import { ReactElement } from 'react';
 import Link from 'next/link';
 import styles from './styles.module.scss';
 import { PostPreviewData } from '../../../types/Post';
+import AuthorAvatar from '../../AuthorAvatar';
 
 interface PostPreviewProps {
   previewData: PostPreviewData;
@@ -23,7 +24,10 @@ export function PostPreview({ previewData }: PostPreviewProps): ReactElement {
 
       <main className={styles.previewContent}>
         <p>{previewData.description}</p>
-        <span>{previewData.author}</span>
+        <AuthorAvatar
+          author={previewData.author}
+          avatarUrl={previewData.avatar.url}
+        />
       </main>
     </div>
   );

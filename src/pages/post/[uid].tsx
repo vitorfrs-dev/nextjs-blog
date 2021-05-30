@@ -11,6 +11,7 @@ import { Post as PostType, PostPreviewData } from '../../types/Post';
 
 import { PostPreview } from '../../components/ArticlePreview/PostPreview';
 import parsePreviewdata from '../../utils/parsePreviewData';
+import AuthorAvatar from '../../components/AuthorAvatar';
 
 interface PostProps {
   post: PostType;
@@ -26,10 +27,7 @@ export default function Post({ post, otherPosts }: PostProps): ReactElement {
       <div className={styles.container}>
         <header className={styles.header}>
           <h1>{post.title}</h1>
-          <div>
-            <div />
-            <span>{post.author}</span>
-          </div>
+          <AuthorAvatar avatarUrl={post.avatar.url} author={post.author} />
         </header>
         <div className={styles.content}>
           <img className={styles.banner} src={post.banner.url} alt="banner" />
@@ -62,7 +60,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const response = await client.query(
     [Prismic.Predicates.at('document.type', 'post')],
     {
-      fetch: ['post.banner', 'post.title', 'post.description', 'post.author'],
+      fetch: [
+        'post.banner',
+        'post.title',
+        'post.description',
+        'post.author',
+        'post.avatar',
+      ],
       orderings: '[document.first_publication_date desc]',
       pageSize: 5,
     },

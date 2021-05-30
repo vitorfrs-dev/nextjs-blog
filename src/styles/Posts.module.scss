@@ -1,7 +1,11 @@
 .header {
   h1 {
-    font-size: 6.25rem;
+    font-size: 4.6rem;
     margin-bottom: 3rem;
+
+    @media only screen and (min-width: 1024px) {
+      font-size: 6.25rem;
+    }
   }
 }
 
@@ -29,6 +33,7 @@
 
 .banner {
   width: 100%;
+  margin-top: 1rem;
   margin-bottom: 4rem;
   box-shadow: 0 5px 10px rgb(0 0 0 / 12%);
 }

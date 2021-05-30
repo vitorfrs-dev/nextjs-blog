@@ -1,6 +1,6 @@
 import { RichTextBlock } from 'prismic-reactjs';
 
-type Banner = {
+type Image = {
   alt: string | null;
   url: string;
 };
@@ -9,7 +9,8 @@ export interface Post {
   title: string;
   description: string;
   author: string;
-  banner: Banner;
+  avatar: Image;
+  banner: Image;
   content: RichTextBlock[];
 }
 
@@ -25,5 +26,6 @@ export interface PostPreviewData {
   title: string;
   description: string;
   author: string;
-  banner: Banner;
+  avatar: Image;
+  banner: Image;
 }
