@@ -1,16 +1,11 @@
 import { ReactElement } from 'react';
 import Link from 'next/link';
 import styles from './styles.module.scss';
+import { PostPreviewData } from '../../../types/Post';
+import AuthorAvatar from '../../AuthorAvatar';
 
 interface NewPostPreviewProps {
-  previewData: {
-    uid: string;
-    publication_date: string;
-    title: string;
-    description: string;
-    author: string;
-    banner: string;
-  };
+  previewData: PostPreviewData;
 }
 
 export function NewPostPreview({
@@ -19,7 +14,11 @@ export function NewPostPreview({
   return (
     <div className={styles.container}>
       <Link href={`/post/${previewData.uid}`}>
-        <img src={previewData.banner} alt="banner" />
+        <img
+          src={previewData.banner.url}
+          alt="banner"
+          className={styles.banner}
+        />
       </Link>
       <main className={styles.content}>
         <div>
@@ -31,7 +30,10 @@ export function NewPostPreview({
 
         <div>
           <p>{previewData.description}</p>
-          <span>{previewData.author}</span>
+          <AuthorAvatar
+            avatarUrl={previewData.avatar.url}
+            author={previewData.author}
+          />
         </div>
       </main>
     </div>

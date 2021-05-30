@@ -1,5 +1,5 @@
 .container {
-  img {
+  img.banner {
     width: 100%;
     cursor: pointer;
     box-shadow: 0 5px 10px rgb(0 0 0 / 12%);
@@ -21,7 +21,7 @@
       gap: 1rem;
     }
 
-    div {
+    > div {
       @media (max-width: 650px) {
         padding: 0 1.25rem;
       }
@@ -40,18 +40,19 @@
         }
       }
 
-      time {
+      > time {
         display: block;
         font-size: 1.125rem;
         margin-top: 1rem;
       }
 
-      p {
+      > p {
         font-size: 1.125rem;
         line-height: 1.625rem;
+        margin-bottom: 1rem;
       }
 
-      span {
+      > span {
         display: block;
         font-weight: 700;
         font-size: 1.25rem;

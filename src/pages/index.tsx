@@ -2,27 +2,17 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Prismic from '@prismicio/client';
 
-import { NewPostPreview } from '../components/ArticlePreview/NewPostPreview';
-import { PostPreview } from '../components/ArticlePreview/PostPreview';
-
 import { getPrismicClient } from '../services/prismic';
-import { getFormattedDate } from '../utils/getFormattedDate';
-
+import { PostPreview } from '../components/ArticlePreview/PostPreview';
+import { NewPostPreview } from '../components/ArticlePreview/NewPostPreview';
+import { PostPreviewData } from '../types/Post';
+import parsePreviewData from '../utils/parsePreviewData';
 import styles from '../styles/Home.module.scss';
-
-interface PostPreview {
-  uid: string;
-  title: string;
-  publication_date: string;
-  description: string;
-  author: string;
-  banner: string;
-}
 
 interface HomeProps {
   postsPreview: {
-    newPostPreview: PostPreview;
-    oldPostsPreview: PostPreview[];
+    newPostPreview: PostPreviewData;
+    oldPostsPreview: PostPreviewData[];
   };
 }
 
@@ -90,22 +80,19 @@ export const getStaticProps: GetStaticProps = async () => {
   const response = await prismic.query(
     [Prismic.Predicates.at('document.type', 'post')],
     {
-      fetch: ['post.banner', 'post.title', 'post.description', 'post.author'],
+      fetch: [
+        'post.banner',
+        'post.title',
+        'post.description',
+        'post.author',
+        'post.avatar',
+      ],
       orderings: '[document.first_publication_date desc]',
       pageSize: 5,
     },
   );
 
-  const previews = response.results.map((post) => {
-    return {
-      uid: post.uid,
-      publication_date: getFormattedDate(post.first_publication_date),
-      title: post.data.title,
-      description: post.data.description,
-      author: post.data.author,
-      banner: post.data.banner.url,
-    };
-  });
+  const previews = response.results.map(parsePreviewData);
 
   const [newPostPreview, ...oldPostsPreview] = previews;
 

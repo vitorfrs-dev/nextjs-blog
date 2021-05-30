@@ -1,0 +1,16 @@
+.avatar {
+  display: flex;
+  align-items: center;
+  
+  &__img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+  }
+
+  &__author-name {
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+}
